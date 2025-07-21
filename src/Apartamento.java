@@ -1,3 +1,6 @@
+/** Classe Apartamento com seus valores e métodos [Subclasse de Imovel]
+ * @see Imovel*/
+
 public class Apartamento extends Imovel{
     private String condominio;
     private int andar;

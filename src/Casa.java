@@ -1,3 +1,6 @@
+/** Classe Casa com seus valores e métodos [Subclasse de Imovel]
+ * @see Imovel*/
+
 public class Casa extends Imovel{
     private int qtd_andares;
 

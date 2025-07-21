@@ -1,3 +1,6 @@
+/** Classe Terreno com seus valores e métodos [Subclasse de Imovel]
+ * @see Imovel*/
+
 public class Terreno extends Imovel {
     private boolean limpo;
 
