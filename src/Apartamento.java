@@ -10,10 +10,14 @@ public class Apartamento extends Imovel{
         System.out.println("Apartamento adicionado");
     }
 
-    /** Reescrita do metodo calculo_comissao para definir a comissao
-     * da venda como 30% do valor total*/
+    /**
+     * Reescrita do metodo calculo_comissao para definir a comissao
+     * da venda como 30% do valor total
+     *
+     * @return Comissao a ser recebida
+     */
     @Override
-    public void calculo_comissao(double valor_venda) {
-        setValor_venda(valor_venda * 0.3);
+    public double calculo_comissao(double valor_venda) {
+        return valor_venda * 0.3;
     }
 }

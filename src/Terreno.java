@@ -9,11 +9,16 @@ public class Terreno extends Imovel {
         System.out.println("Terreno adicionado");
     }
 
-    /** Reescrita do metodo calculo_comissao para definir a comissao
-     * da venda como 10% do valor total*/
+    /**
+     * Reescrita do metodo calculo_comissao para definir a comissao
+     * da venda como 10% do valor total
+     *
+     * @return Comissao a ser recebida
+     */
     @Override
-    public void calculo_comissao(double valor_venda) {
-        setValor_venda(valor_venda * 0.1);
+    public double calculo_comissao(double valor_venda) {
+        return valor_venda * 0.1;
+
     }
 
 }

@@ -1,10 +1,10 @@
+
 /** Superclasse abstrata Imovel que contem valores e métodos básicos para todos os tipos de imóveis */
 
 public abstract class Imovel implements Comissao{
     /** Variáveis necessarias*/
-    private double valor_venda;
     private String endereco;
-    private int id_venda;
+    private int id_imovel;
     private String proprietario;
     private String corretor;
     private double comissao_total;
@@ -23,14 +23,6 @@ public abstract class Imovel implements Comissao{
         this.comissao_total = comissao_total;
     }
 
-    public double getValor_venda() {
-        return valor_venda;
-    }
-
-    public void setValor_venda(double valor_venda) {
-        this.valor_venda = valor_venda;
-    }
-
     public String getEndereco() {
         return endereco;
     }
@@ -39,12 +31,12 @@ public abstract class Imovel implements Comissao{
         this.endereco = endereco;
     }
 
-    public int getId_venda() {
-        return id_venda;
+    public int getId_imovel() {
+        return id_imovel;
     }
 
-    public void setId_venda(int id_venda) {
-        this.id_venda = id_venda;
+    public void setId_imovel(int id_imovel) {
+        this.id_imovel = id_imovel;
     }
 
     public String getProprietario() {
