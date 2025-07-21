@@ -1,6 +1,7 @@
 /** Superclasse abstrata Imovel que contem valores e métodos básicos para todos os tipos de imóveis */
 
 public abstract class Imovel implements Comissao{
+    /** Variáveis necessarias*/
     private double valor_venda;
     private String endereco;
     private int id_venda;
@@ -9,9 +10,7 @@ public abstract class Imovel implements Comissao{
     private double comissao_total;
     private double metragem;
 
-    @Override
-    public void calculo_comissao(double valor_venda){};
-
+    /** Métodos Get e Set dos valores*/
     public double getMetragem() {
         return metragem;
     }

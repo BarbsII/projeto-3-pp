@@ -2,12 +2,15 @@
  * @see Imovel*/
 
 public class Terreno extends Imovel {
+    /** Variável Específica da Classe*/
     private boolean limpo;
 
     public Terreno() {
         System.out.println("Terreno adicionado");
     }
 
+    /** Reescrita do metodo calculo_comissao para definir a comissao
+     * da venda como 10% do valor total*/
     @Override
     public void calculo_comissao(double valor_venda) {
         setValor_venda(valor_venda * 0.1);
