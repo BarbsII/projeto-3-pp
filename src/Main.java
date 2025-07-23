@@ -3,8 +3,7 @@
 public class Main {
     public static void main(String[] args) {
 
-       // SistemaImobiliarioGUI.init();
-        new frameAltEx();
+        SistemaImobiliarioGUI.init();
     }
 }
 

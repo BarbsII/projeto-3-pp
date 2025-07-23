@@ -172,5 +172,7 @@ public class SistemaImobiliarioGUI {
         dialog.setVisible(true);
     }
 
-    private static void mostrarAltExVendas() {}
+    private static void mostrarAltExVendas() {
+        new frameAltEx();
+    }
 }

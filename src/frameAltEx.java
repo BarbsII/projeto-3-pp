@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class frameAltEx extends JFrame {
+public class frameAltEx extends JDialog {
     frameAltEx() {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(600,600);
         this.setLayout(new GridLayout(1,2,10,0));
+        this.setTitle("Alterar ou Excluir Vendas");
 
         // Painéis Direita e Esquerda:
         JPanel painelEsq = new JPanel();
