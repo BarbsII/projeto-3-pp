@@ -9,6 +9,14 @@ public class frameAltEx extends JDialog {
     // Id de venda Selecionada
     JLabel mostraIdVenda = new JLabel();
 
+    // Venda Selecionada
+    Venda vendaSelecionada = new Venda();
+
+    // Valores Antigos da Venda Selecionada
+
+    // Painel Direito de Baixo
+    JPanel painelDirBaixo = new JPanel(new GridLayout(4,3));
+
     frameAltEx() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(800,600);
@@ -38,7 +46,7 @@ public class frameAltEx extends JDialog {
 
         // -- vendas cadastradas
        String textoVenda = "";
-       //int objectCounter = 0;
+       int objectCounter = 0;
         for (Venda venda : VendaDAO.listarVendas()) {
             Corretor corretor = CorretorDAO.getCorretor(venda.getId_corretor());
             textoVenda = (String.format("ID: %d | Corretor: %s (ID: %d) | Valor: R$%.2f\n",
@@ -49,9 +57,12 @@ public class frameAltEx extends JDialog {
 
             JButton botaoVenda = new JButton(textoVenda); // criação do botão para cada venda
             botaoVenda.addActionListener(e -> {
-                funcaoBotaoVenda(venda);});
-            //botaoVenda.setName(String.valueOf(objectCounter)); // contagem do botão por meio de nomeação
-            //objectCounter++;
+                funcaoBotaoVenda(venda);
+                vendaSelecionada = venda;
+                painelDirBaixo.setVisible(false);
+            });
+            botaoVenda.setName(String.valueOf(objectCounter)); // contagem do botão por meio de nomeação
+            objectCounter++;
 
             painelEsqBaixo.add(botaoVenda); // adiciona o botão ao painel inferior esquerdo
 
@@ -90,26 +101,26 @@ public class frameAltEx extends JDialog {
         painelDirCima.add(btnExcluir);
 
         // -- Painel de Baixo Direita --
-        JPanel painelDirBaixo = new JPanel(new GridLayout(4,3));
+        //JPanel painelDirBaixo = new JPanel(new GridLayout(4,3));
         painelDirBaixo.setBackground(Color.lightGray);
         painelDir.add(painelDirBaixo);
         painelDirBaixo.setVisible(false);
 
         // -- textos e caixas
         JLabel text1 = new JLabel("Id Corretor");
-        JLabel idCorAntigo = new JLabel("Valor antigo");
+        JLabel idCorAntigo = new JLabel();
         JTextField idCorNovo = new JTextField();
 
         JLabel text2 = new JLabel("Tipo Imóvel");
-        JLabel tipoImovAntigo = new JLabel("Valor antigo");
+        JLabel tipoImovAntigo = new JLabel();
         JTextField tipoImovNovo = new JTextField();
 
         JLabel text3 = new JLabel("Id Imóvel");
-        JLabel idImovAntigo = new JLabel("Valor antigo");
+        JLabel idImovAntigo = new JLabel();
         JTextField idImovNovo = new JTextField();
 
         JLabel text4 = new JLabel("Valor Total da Compra");
-        JLabel valorTotalAntigo = new JLabel("Valor antigo");
+        JLabel valorTotalAntigo = new JLabel();
         JTextField valorTotalNovo = new JTextField();
 
         painelDirBaixo.add(text1);
@@ -130,8 +141,15 @@ public class frameAltEx extends JDialog {
         painelDirBaixo.add(valorTotalNovo);
 
         // Ações Botões Painel Direito
-        btnAlterar.addActionListener(e -> {painelDirBaixo.setVisible(true);});
-        btnExcluir.addActionListener(e -> painelDirBaixo.setVisible(false));
+        btnAlterar.addActionListener(e -> {
+            painelDirBaixo.setVisible(true);
+            funcaoBotaoAlterar(idCorAntigo,tipoImovAntigo,idImovAntigo,valorTotalAntigo);
+        });
+
+        btnExcluir.addActionListener(e -> {
+            painelDirBaixo.setVisible(false);
+            funcaoBotaoExcluir();}
+        );
 
         // Adições ao Frame:
         this.add(painelEsq);
@@ -147,4 +165,17 @@ public class frameAltEx extends JDialog {
         // Mostrar id
         mostraIdVenda.setText(String.valueOf(venda.getId_venda()));
     }
+
+    public void funcaoBotaoAlterar(JLabel idCorAntigo, JLabel tipoImovAntigo, JLabel idImovAntigo, JLabel valorTotalAntigo){
+        System.out.println("Alterar " + vendaSelecionada.getId_venda());
+        idCorAntigo.setText(String.valueOf(vendaSelecionada.getId_corretor()));
+
+        idImovAntigo.setText(String.valueOf(vendaSelecionada.getId_imovel()));
+        valorTotalAntigo.setText(String.valueOf(vendaSelecionada.getValor_venda()));
+
+    }
+    public void funcaoBotaoExcluir(){
+        System.out.println("Excluir" + vendaSelecionada.getId_venda());
+    }
+
 }
