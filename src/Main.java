@@ -3,11 +3,6 @@
 public class Main {
     public static void main(String[] args) {
 
-        Imovel teste1 = new Apartamento();
-        Imovel teste2 = new Casa();
-        Imovel teste3 = new Terreno();
-
-
         SistemaImobiliarioGUI.init();
     }
 }

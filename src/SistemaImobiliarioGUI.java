@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class SistemaImobiliarioGUI {
     public static void init() {
@@ -8,22 +8,25 @@ public class SistemaImobiliarioGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
 
-        JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
 
         JButton btnCadastrarVenda = new JButton("Cadastrar Venda");
         JButton btnConsultarVendas = new JButton("Consultar Vendas");
         JButton btnCadastrarCorretor = new JButton("Cadastrar Corretor");
         JButton btnConsultarCorretores = new JButton("Consultar Corretores");
+        JButton btnAltExVendas = new JButton("Alterar ou Excluir Vendas");
 
         btnCadastrarVenda.addActionListener(e -> mostrarTelaCadastroVenda());
         btnConsultarVendas.addActionListener(e -> mostrarConsultarVendas());
         btnCadastrarCorretor.addActionListener(e -> mostrarCadastroCorretor());
         btnConsultarCorretores.addActionListener(e -> mostrarConsultarCorretores());
+        btnAltExVendas.addActionListener(e -> mostrarAltExVendas());
 
         panel.add(btnCadastrarVenda);
         panel.add(btnConsultarVendas);
         panel.add(btnCadastrarCorretor);
         panel.add(btnConsultarCorretores);
+        panel.add(btnAltExVendas);
 
         frame.add(panel);
         frame.setVisible(true);
@@ -166,6 +169,44 @@ public class SistemaImobiliarioGUI {
 
         textArea.setText(sb.toString());
         dialog.add(new JScrollPane(textArea));
+        dialog.setVisible(true);
+    }
+
+    private static void mostrarAltExVendas() {
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Alteração ou Exclusão de Vendas");
+        dialog.setSize(500, 400);
+        dialog.setLayout(new BorderLayout());
+
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton btnExcluir = new JButton("Excluir Venda");
+        JButton btnAlterar = new JButton("Alterar Venda");
+        
+        panel1.add(btnExcluir);
+        panel1.add(btnAlterar);
+
+        JPanel panel2 = new JPanel();
+        ArrayList listaBtVendas = new ArrayList();
+        for (Venda venda : VendaDAO.listarVendas()) {
+            Corretor corretor = CorretorDAO.getCorretor(venda.getId_corretor());
+            JButton vendaAnterior = new JButton(String.format("ID: %d | Corretor: %s (ID: %d) | Valor: R$%.2f\n",
+                    venda.getId_venda(),
+                    corretor != null ? corretor.getNome() : "Desconhecido",
+                    venda.getId_corretor(),
+                    venda.getValor_venda()));
+            listaBtVendas.add(vendaAnterior);
+            vendaAnterior.addActionListener(e ->{
+
+            });
+
+            panel2.add(vendaAnterior);
+        }
+
+        dialog.add(panel1, BorderLayout.NORTH);
+        dialog.add(panel2, BorderLayout.CENTER);
+        panel1.setVisible(true);
+        panel2.setVisible(true);
         dialog.setVisible(true);
     }
 }
