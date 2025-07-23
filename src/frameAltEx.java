@@ -6,6 +6,9 @@ public class frameAltEx extends JDialog {
     JButton btnAlterar = new JButton("Alterar");
     JButton btnExcluir = new JButton("Excluir");
 
+    // Id de venda Selecionada
+    JLabel mostraIdVenda = new JLabel();
+
     frameAltEx() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(800,600);
@@ -35,6 +38,7 @@ public class frameAltEx extends JDialog {
 
         // -- vendas cadastradas
        String textoVenda = "";
+       //int objectCounter = 0;
         for (Venda venda : VendaDAO.listarVendas()) {
             Corretor corretor = CorretorDAO.getCorretor(venda.getId_corretor());
             textoVenda = (String.format("ID: %d | Corretor: %s (ID: %d) | Valor: R$%.2f\n",
@@ -42,9 +46,14 @@ public class frameAltEx extends JDialog {
                     corretor != null ? corretor.getNome() : "Desconhecido",
                     venda.getId_corretor(),
                     venda.getValor_venda()));
-            JButton botaoVenda = new JButton(textoVenda);
-            botaoVenda.addActionListener(e -> {habilitarbotoes();});
-            painelEsqBaixo.add(botaoVenda);
+
+            JButton botaoVenda = new JButton(textoVenda); // criação do botão para cada venda
+            botaoVenda.addActionListener(e -> {
+                funcaoBotaoVenda(venda);});
+            //botaoVenda.setName(String.valueOf(objectCounter)); // contagem do botão por meio de nomeação
+            //objectCounter++;
+
+            painelEsqBaixo.add(botaoVenda); // adiciona o botão ao painel inferior esquerdo
 
         }
 
@@ -58,18 +67,18 @@ public class frameAltEx extends JDialog {
 
         // -- Painel de Cima Direita --
         JPanel painelDirCima = new JPanel(new GridLayout(2,1));
-        painelDirCima.setBackground(Color.BLACK);
+        painelDirCima.setBackground(new Color(0x80d9d9));
         painelDirCima.setPreferredSize(new Dimension(100,100));
         painelDir.add(painelDirCima, BorderLayout.NORTH);
 
         // -- texto
-        JLabel nomeVenda = new JLabel("Venda ID:");
+        JLabel nomeVenda = new JLabel("ID Venda Selecionada:");
         nomeVenda.setHorizontalAlignment(JLabel.CENTER);
         painelDirCima.add(nomeVenda);
 
-        JLabel idVenda= new JLabel("Id da Venda Aqui");
-        idVenda.setHorizontalAlignment(JLabel.CENTER);
-        painelDirCima.add(idVenda);
+
+        mostraIdVenda.setHorizontalAlignment(JLabel.CENTER);
+        painelDirCima.add(mostraIdVenda);
 
 
 
@@ -130,8 +139,12 @@ public class frameAltEx extends JDialog {
         this.setVisible(true);
     }
 
-    public void habilitarbotoes(){
+    public void funcaoBotaoVenda(Venda venda){
+        // habilitar os botões de Alterar e Excluir
         this.btnAlterar.setEnabled(true);
         this.btnExcluir.setEnabled(true);
+
+        // Mostrar id
+        mostraIdVenda.setText(String.valueOf(venda.getId_venda()));
     }
 }
