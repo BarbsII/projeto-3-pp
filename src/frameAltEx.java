@@ -2,9 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class frameAltEx extends JDialog {
+    // -- botoes
+    JButton btnAlterar = new JButton("Alterar");
+    JButton btnExcluir = new JButton("Excluir");
+
     frameAltEx() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setSize(600,600);
+        this.setSize(800,600);
         this.setLayout(new GridLayout(1,2,10,0));
         this.setTitle("Alterar ou Excluir Vendas");
 
@@ -24,9 +28,30 @@ public class frameAltEx extends JDialog {
         textoEsq.setPreferredSize(new Dimension(100,100));
         painelEsq.add(textoEsq, BorderLayout.NORTH);
 
+        // -- Painel de Baixo Esquerda
         JPanel painelEsqBaixo = new JPanel();
         painelEsqBaixo.setBackground(Color.yellow);
         painelEsq.add(painelEsqBaixo);
+
+        // -- vendas cadastradas
+       String textoVenda = "";
+        for (Venda venda : VendaDAO.listarVendas()) {
+            Corretor corretor = CorretorDAO.getCorretor(venda.getId_corretor());
+            textoVenda = (String.format("ID: %d | Corretor: %s (ID: %d) | Valor: R$%.2f\n",
+                    venda.getId_venda(),
+                    corretor != null ? corretor.getNome() : "Desconhecido",
+                    venda.getId_corretor(),
+                    venda.getValor_venda()));
+            JButton botaoVenda = new JButton(textoVenda);
+            botaoVenda.addActionListener(e -> {habilitarbotoes();});
+            painelEsqBaixo.add(botaoVenda);
+
+        }
+
+
+
+
+
 
         // Componentes do Painel Direito
         painelDir.setLayout(new BorderLayout());
@@ -46,9 +71,11 @@ public class frameAltEx extends JDialog {
         idVenda.setHorizontalAlignment(JLabel.CENTER);
         painelDirCima.add(idVenda);
 
-        // -- botoes
-        JButton btnAlterar = new JButton("Alterar");
-        JButton btnExcluir = new JButton("Excluir");
+
+
+        btnAlterar.setEnabled(false); // inicia desabilitado
+        btnExcluir.setEnabled(false); // inicia desabilitado
+
 
         painelDirCima.add(btnAlterar);
         painelDirCima.add(btnExcluir);
@@ -57,7 +84,7 @@ public class frameAltEx extends JDialog {
         JPanel painelDirBaixo = new JPanel(new GridLayout(4,3));
         painelDirBaixo.setBackground(Color.lightGray);
         painelDir.add(painelDirBaixo);
-        //painelDirBaixo.setVisible();
+        painelDirBaixo.setVisible(false);
 
         // -- textos e caixas
         JLabel text1 = new JLabel("Id Corretor");
@@ -93,9 +120,18 @@ public class frameAltEx extends JDialog {
         painelDirBaixo.add(valorTotalAntigo);
         painelDirBaixo.add(valorTotalNovo);
 
+        // Ações Botões Painel Direito
+        btnAlterar.addActionListener(e -> {painelDirBaixo.setVisible(true);});
+        btnExcluir.addActionListener(e -> painelDirBaixo.setVisible(false));
+
         // Adições ao Frame:
         this.add(painelEsq);
         this.add(painelDir);
         this.setVisible(true);
+    }
+
+    public void habilitarbotoes(){
+        this.btnAlterar.setEnabled(true);
+        this.btnExcluir.setEnabled(true);
     }
 }
