@@ -172,41 +172,5 @@ public class SistemaImobiliarioGUI {
         dialog.setVisible(true);
     }
 
-    private static void mostrarAltExVendas() {
-        JDialog dialog = new JDialog();
-        dialog.setTitle("Alteração ou Exclusão de Vendas");
-        dialog.setSize(500, 400);
-        dialog.setLayout(new BorderLayout());
-
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JButton btnExcluir = new JButton("Excluir Venda");
-        JButton btnAlterar = new JButton("Alterar Venda");
-        
-        panel1.add(btnExcluir);
-        panel1.add(btnAlterar);
-
-        JPanel panel2 = new JPanel();
-        ArrayList listaBtVendas = new ArrayList();
-        for (Venda venda : VendaDAO.listarVendas()) {
-            Corretor corretor = CorretorDAO.getCorretor(venda.getId_corretor());
-            JButton vendaAnterior = new JButton(String.format("ID: %d | Corretor: %s (ID: %d) | Valor: R$%.2f\n",
-                    venda.getId_venda(),
-                    corretor != null ? corretor.getNome() : "Desconhecido",
-                    venda.getId_corretor(),
-                    venda.getValor_venda()));
-            listaBtVendas.add(vendaAnterior);
-            vendaAnterior.addActionListener(e ->{
-
-            });
-
-            panel2.add(vendaAnterior);
-        }
-
-        dialog.add(panel1, BorderLayout.NORTH);
-        dialog.add(panel2, BorderLayout.CENTER);
-        panel1.setVisible(true);
-        panel2.setVisible(true);
-        dialog.setVisible(true);
-    }
+    private static void mostrarAltExVendas() {}
 }
