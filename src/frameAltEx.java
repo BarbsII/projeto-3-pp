@@ -54,6 +54,44 @@ public class frameAltEx extends JDialog {
         painelDirCima.add(btnExcluir);
 
         // -- Painel de Baixo Direita --
+        JPanel painelDirBaixo = new JPanel(new GridLayout(4,3));
+        painelDirBaixo.setBackground(Color.lightGray);
+        painelDir.add(painelDirBaixo);
+        //painelDirBaixo.setVisible();
+
+        // -- textos e caixas
+        JLabel text1 = new JLabel("Id Corretor");
+        JLabel idCorAntigo = new JLabel("Valor antigo");
+        JTextField idCorNovo = new JTextField();
+
+        JLabel text2 = new JLabel("Tipo Imóvel");
+        JLabel tipoImovAntigo = new JLabel("Valor antigo");
+        JTextField tipoImovNovo = new JTextField();
+
+        JLabel text3 = new JLabel("Id Imóvel");
+        JLabel idImovAntigo = new JLabel("Valor antigo");
+        JTextField idImovNovo = new JTextField();
+
+        JLabel text4 = new JLabel("Valor Total da Compra");
+        JLabel valorTotalAntigo = new JLabel("Valor antigo");
+        JTextField valorTotalNovo = new JTextField();
+
+        painelDirBaixo.add(text1);
+        painelDirBaixo.add(idCorAntigo);
+        painelDirBaixo.add(idCorNovo);
+
+        painelDirBaixo.add(text2);
+        painelDirBaixo.add(tipoImovAntigo);
+        painelDirBaixo.add(tipoImovNovo);
+
+        painelDirBaixo.add(text3);
+        painelDirBaixo.add(idImovAntigo);
+        painelDirBaixo.add(idImovNovo);
+
+
+        painelDirBaixo.add(text4);
+        painelDirBaixo.add(valorTotalAntigo);
+        painelDirBaixo.add(valorTotalNovo);
 
         // Adições ao Frame:
         this.add(painelEsq);
