@@ -11,10 +11,10 @@ Um registrador de transações imobiliárias que irá receber as informações d
 
 ### Estrutura de Classes
 Existem 9 classes e 1 interface.
-A classe **Imovel** é superclasse das três outras classes: **Apartamento**, **Casa** e **Terreno**.
-As classes **Corretor** e **Venda** modelam esses objetos que representam corretores e vendas, enquanto classes **CorretorDAO** e **VendaDAO** são utilizdas para a listagem dos mesmos.
-A classe **SistemaImobiliarioGUI** contém as estruturas da interface gráfica, a qual é inicializada no **Main**.
-A interface **Comissao** apresenta o cálculo das comissões e é implementada em Imovél, seu método "cálculo_comissão" é reescrito para cada tipo de subclasse de Imóvel.
+- A classe **Imovel** é superclasse das três outras classes: **Apartamento**, **Casa** e **Terreno**.
+- As classes **Corretor** e **Venda** modelam esses objetos que representam corretores e vendas, enquanto classes **CorretorDAO** e **VendaDAO** são utilizdas para a listagem dos mesmos.
+- A classe **SistemaImobiliarioGUI** contém as estruturas da interface gráfica, a qual é inicializada no **Main**.
+- A interface **Comissao** apresenta o cálculo das comissões e é implementada em Imovél, seu método "cálculo_comissão" é reescrito para cada tipo de subclasse de Imóvel.
 
 ### Cálculo de Comissão
 Cada tipo de imóvel tem uma porcentagem arbitrária de comissão diferente que é calculada pela reescrita do método **calculo_comissao** (pertencente à interface Comissão) em cada subclasse de **Imovel**:
